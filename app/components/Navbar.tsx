@@ -7,11 +7,11 @@ import Link from 'next/link';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    const isDarkMode = localStorage.getItem('darkMode') !== 'false';
     setIsDark(isDarkMode);
     document.documentElement.classList.toggle('dark', isDarkMode);
 
