@@ -25,6 +25,7 @@ export default function Home() {
   const [isPaused, setIsPaused] = useState(false);
   const [currentRole, setCurrentRole] = useState(roles[0]);
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     subject: '',
     message: ''
@@ -91,8 +92,9 @@ export default function Home() {
         'service_dt9kdu9', // Replace with your EmailJS service ID
         'template_tdlzchu', // Replace with your EmailJS template ID
         {
-          from_email: formData.email,
-          subject: formData.subject,
+          name: formData.name,
+          email: formData.email,
+          title: formData.subject,
           message: formData.message,
           to_email: resumeData.contact.email
         },
@@ -100,7 +102,7 @@ export default function Home() {
       );
 
       setFormStatus({ submitting: false, success: true, error: false });
-      setFormData({ email: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
       setFormStatus({ submitting: false, success: false, error: true });
     }
@@ -431,6 +433,21 @@ export default function Home() {
                 Feel free to reach out!
               </p>
               <form className="space-y-6" onSubmit={handleFormSubmit}>
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-accent focus:border-transparent"
+                    placeholder="Your name"
+                  />
+                </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Email
